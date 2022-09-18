@@ -9,7 +9,6 @@ pragma solidity >=0.4.25 <0.9.0;
  */
 library Types {
     struct Voter {
-        uint256 number; // voter unique ID
         bool hasVoted;
         uint256 votingCenter;
       }
@@ -25,6 +24,7 @@ library Types {
     struct VotingCenter {
         uint256 centerId;
         string name;
+        uint256 count;
     }
 
     struct Vote {
