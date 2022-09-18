@@ -1,0 +1,17 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "avatikiotis",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.2.1",
+    "parcel": "^2.7.0",
+    "web3": "^1.8.0"
+  }
+}
