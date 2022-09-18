@@ -11,12 +11,14 @@ import "./Types.sol";
  */
 contract Ballot {
     Types.Candidate[] public candidates;
-    mapping(uint256 => Types.Voter) voter;
-    mapping(uint256 => Types.Candidate) candidate;
+    mapping(address => Types.Voter) voters;
+    // mapping(uint256 => Types.Candidate) candidate;
     Types.VotingCenter[] public votingCenters;
     mapping(uint256 => uint256) internal votesCount;
-    Types.Votes[] public votes;
+    Types.Vote[] public votes;
     address electionChief;
+    //2-dim results array. 1st dim: voting centers, 2nd dim candidates
+    uint256[][] Results;
 
 
     /**
@@ -24,10 +26,12 @@ contract Ballot {
      * @param startTime_ When the voting process will start
      * @param endTime_ When the voting process will end
      */
-     constructor(uint256 startTime_, uint256 endTime_) public{
+     constructor(uint256 startTime_, uint256 endTime_) {
         initializeCandidateDatabase_();
-        initializeVoterDatabase_();
         initializeVotingCenterDatabase_();
+        initializeVoterDatabase_();
+        
+        initializeResultsDatabase_();
         electionChief = msg.sender;
     }
 
@@ -46,15 +50,15 @@ contract Ballot {
 
     /**
      * @dev Get candidate list.
-     * @param voterNumber  number of the current voter to send the relevent candidates list
+     * @param voterAddress  address of the current voter to send the relevent candidates list
      * @return voterEligible_ Whether the voter with provided  is eligible or not
      */
-    function isVoterEligible(uint256 voterNumber)
+    function isVoterEligible(address voterAddress)
         public
         view
         returns (bool voterEligible_)
     {
-        Types.Voter storage voter_ = voter[voterNumber];
+        Types.Voter storage voter_ = voters[voterAddress];
         if (!voter_.hasVoted) voterEligible_ = true;
     }
 
@@ -62,91 +66,56 @@ contract Ballot {
 
     /**
      * @dev Give your vote to candidate.
-     * @param nominationNumber  Number of the candidate
-     * @param voterNumber  Number of the voter to avoid re-entry
+     * @param votingCenter_ Number of the voting center
+     * @param candidate_  Number of the candidate
      */
-    function vote(
-        uint256 nominationNumber,
-        uint256 voterNumber
-    )
-        public
-        isEligibleVote(voterNumber, nominationNumber)
+    function vote(uint256 votingCenter_, uint256 candidate_) isEligibleVote public
     {
         // updating the current voter values
-        voter[voterNumber].hasVoted = true;
+        voters[msg.sender].hasVoted = true;
 
-        // updates the votes the politician
-        uint256 voteCount_ = votesCount[nominationNumber];
-        votesCount[nominationNumber] = voteCount_ + 1;
+       Results[votingCenter_][candidate_] += 1;
     }
-
-
-
-  
-
-
 
     /**
      * @dev sends all candidate list with their votes count
      * @param votingCenter_ voting center
-     * @return candidateList_ List of Candidate objects with votes count
+     * @return uint256[] array of total counts per candidate of voting center
      */
     function getResultsPerVotingCenter(uint256 votingCenter_)
         public
         view
-        returns (Types.Vote[] memory)
+        returns (uint256[] memory)
     {
     
-        Types.Vote[] memory resultsList_ = new Types.Vote[](
-            candidates.length
-        );
-        for (uint256 i = 0; i < candidates.length; i++) {
-            if(votingCenter_ == )
-            resultsList_[i] = Types.Results({
-                name: candidates[i].name,
-                partyFlag: candidates[i].partyFlag,
-                nominationNumber: candidates[i].nominationNumber,
-                voteCount: votesCount[candidates[i].nominationNumber]
-            });
-        }
-        return resultsList_;
+        return Results[votingCenter_];
     }
 
 
-  /**
+   /**
      * @dev sends all candidate list with their votes count
-     * @param votingCenter_ 
-     * @return candidateList_ List of Candidate objects with votes count
+     * @return uint256[] array of total counts per candidate
      */
-    function getResults(uint256 votingCenter_)
+    function getResults()
         public
         view
-        returns (Types.Results[] memory)
+        returns (uint256[] memory)
     {
-    
-        Types.Results[] memory resultsList_ = new Types.Results[](
-            candidates.length
-        );
-        for (uint256 i = 0; i < candidates.length; i++) {
-            resultsList_[i] = Types.Results({
-                name: candidates[i].name,
-                partyFlag: candidates[i].partyFlag,
-                nominationNumber: candidates[i].nominationNumber,
-                voteCount: votesCount[candidates[i].nominationNumber]
-            });
+        uint256[] memory results;
+        for(uint i = 0; i < candidates.length; i++) {
+            results[i] = 0;
+            for(uint j = 0; j < votingCenters.length; j++) {
+                results[i] += Results[i][j];
+            }
         }
-        return resultsList_;
+        return results;
     }
 
 
     /**
-     * @param voterId_ Id number of the current voter
-     * @param nominationNumber_ Nomination number of the candidate
      */
-    modifier isEligibleVote(uint256 voterId_, uint256 nominationNumber_) {
-        Types.Voter memory voter_ = voter[voterId_];
-        Types.Candidate memory politician_ = candidate[nominationNumber_];
-    
+    modifier isEligibleVote() {
+        Types.Voter memory voter_ = voters[msg.sender];    
         require(voter_.hasVoted == false);
         _;
     }
@@ -165,47 +134,117 @@ contract Ballot {
      * which will be called at the time of deployment
      */
     function initializeCandidateDatabase_() internal {
-        Types.Candidate[] memory candidates_ = new Types.Candidate[](5);
-
-        // Kyriakos Mhtsotakis
-        candidates_[0] = Types.Candidate({
+        candidates.push(Types.Candidate({
             name: "ND",
             partyFlag: "https://www.news247.gr/img/1659/6654410/663000/w660/660/ndnewlogoofficial.jpg",
             nominationNumber: uint256(1)
-        });
-        candidates_[1] = Types.Candidate({
+        }));
+        candidates.push(Types.Candidate({
             name: "PASOK",
             partyFlag: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Panellinio_Sosialistiko_Kinima_Logo.svg/800px-Panellinio_Sosialistiko_Kinima_Logo.svg.png",
             nominationNumber: uint256(2)
-        });
-        candidates_[2] = Types.Candidate({
+        }));
+        candidates.push(Types.Candidate({
             name: "SYRIZA",
             partyFlag: "https://greekreporter.com/wp-content/uploads/2020/09/syriza-neo-sima-15-9-20.jpg",
             nominationNumber: uint256(3)
-        });
-        candidates_[3] = Types.Candidate({
+        }));
+        candidates.push(Types.Candidate({
             name: "KKE",
-            partyFlag: "https://www.k-tipos.gr/wp-content/uploads/2018/04/kke-logo.jpg",
+            partyFlag: "https://www.kke.gr/export/sites/default/.content/site-images/logo-og.jpg",
             nominationNumber: uint256(4)
-        });
+        }));
 
-        candidates_[4] = Types.Candidate({
+        candidates.push(Types.Candidate({
             name: "MERA25",
             partyFlag: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mera25-logo.svg/1200px-Mera25-logo.svg.png",
             nominationNumber: uint256(5)
-        });
+        }));
+
     
+    }
+
+    function initializeVotingCenterDatabase_() internal {
+        votingCenters.push(Types.VotingCenter({
+            centerId: 1,
+            name: "voting center 1",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 2,
+            name: "voting center 2",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 3,
+            name: "voting center 3",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 4,
+            name: "voting center 4",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 5,
+            name: "voting center 5",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 6,
+            name: "voting center 6",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 7,
+            name: "voting center 7",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 8,
+            name: "voting center 8",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 9,
+            name: "voting center 9",
+            count: 0
+        }));
+        votingCenters.push(Types.VotingCenter({
+            centerId: 10,
+            name: "voting center 10",
+            count: 0
+        }));
+    }
+    function initializeResultsDatabase_() internal {
+        for (uint i=0;i<votingCenters.length;i++){
+            for (uint j=0;j<candidates.length;j++){
+                Results.push ([0,0]);
+            }
+        }
+    }
+
+    function registerVoter() public {
+        uint256 votingCenterIndex = 0;
+        for(uint i = 0; i < votingCenters.length; i++) {
+            if(votingCenters[i].count < 10) {
+                votingCenterIndex = i;
+                votingCenters[i].count += 1;
+                break;
+            }
+        }
+        voters[msg.sender] = Types.Voter(false, votingCenterIndex);
     }
 
     /**
      * Dummy data for voter users
      */
     function initializeVoterDatabase_() internal {
-        voter[uint256(1)] = Types.Voter({
-            name: "test1",
-            number: uint256(2),
-            hasVoted: false
-        });
+        // voter[uint256(1)] = Types.Voter({
+        //     name: "test1",
+        //     number: uint256(2),
+        //     hasVoted: false
+        // });
     }
 
     function initializeVotingCenter_() internal {
@@ -213,52 +252,62 @@ contract Ballot {
 
         votingCenters_[0] = Types.VotingCenter({
             name: "athens",
-            centerId: uint256(1)
+            centerId: uint256(1),
+            count: 0
         });
 
            votingCenters_[1] = Types.VotingCenter({
             name: "patra",
-            centerId: uint256(2)
+            centerId: uint256(2),
+            count: 0
         });
 
            votingCenters_[2] = Types.VotingCenter({
             name: "peiraias",
-            centerId: uint256(3)
+            centerId: uint256(3),
+            count: 0
         });
 
            votingCenters_[3] = Types.VotingCenter({
             name: "thessaloniki",
-            centerId: uint256(4)
+            centerId: uint256(4),
+            count: 0
         });
 
            votingCenters_[4] = Types.VotingCenter({
             name: "larissa",
-            centerId: uint256(5)
+            centerId: uint256(5),
+            count: 0
         });
 
            votingCenters_[5] = Types.VotingCenter({
             name: "lamia",
-            centerId: uint256(6)
+            centerId: uint256(6),
+            count: 0
         });
 
            votingCenters_[6] = Types.VotingCenter({
             name: "trikala",
-            centerId: uint256(7)
+            centerId: uint256(7),
+            count: 0
         });
 
            votingCenters_[7] = Types.VotingCenter({
             name: "krhth",
-            centerId: uint256(8)
+            centerId: uint256(8),
+            count: 0
         });
 
               votingCenters_[8] = Types.VotingCenter({
             name: "volos",
-            centerId: uint256(9)
+            centerId: uint256(9),
+            count: 0
         });
 
               votingCenters_[9] = Types.VotingCenter({
             name: "trikala",
-            centerId: uint256(10)
+            centerId: uint256(10),
+            count: 0
         });
     }
 }
