@@ -225,7 +225,7 @@ contract Ballot {
         }
     }
 
-    function registerVoter() public {
+    function registerVoter(address voter_) public {
         uint256 votingCenterIndex = 0;
         for(uint i = 0; i < votingCenters.length; i++) {
             if(votingCenters[i].count < 10) {
@@ -234,7 +234,7 @@ contract Ballot {
                 break;
             }
         }
-        voters[msg.sender] = Types.Voter(false, votingCenterIndex);
+        voters[voter_] = Types.Voter(false, votingCenterIndex);
     }
 
     /**
