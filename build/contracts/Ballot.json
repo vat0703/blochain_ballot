@@ -18464,12 +18464,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xA854b6455C83CFf092D5578C56907e9F8f2Db9d5",
-      "transactionHash": "0xd197a5059e48b57ac5ed2b3443ab4ea07a196bfd866d35c58af5c91c010ce564"
+      "address": "0x7fFBBcb09168921BF82ef3128150e3587E2c69d4",
+      "transactionHash": "0xb66c43dfdabb808ef49ee7e99a38fbbd12490e977921ccfb04c486f5c031f07f"
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-18T18:17:10.699Z",
+  "updatedAt": "2022-09-18T18:39:39.639Z",
+  "networkType": "ethereum",
   "devdoc": {
     "author": "Aimilios Vatikiotis ",
     "details": "Implements voting process along with winning candidate",

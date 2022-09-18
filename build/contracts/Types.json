@@ -802,12 +802,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xAB411E5e5E0B89343e5310Ce93232973bB4D8704",
-      "transactionHash": "0xbd895ac4855ab85482cd82c28d9722dfcb6b22a7fcc88b827f2d9e8827458823"
+      "address": "0x39a1A8d8cf11770e54ED113826f6ECF42D1a0205",
+      "transactionHash": "0xbc47776ad6654abfd7c64d574fad836779e2aa2e3dd95a2a2e6014db88a11db2"
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-18T18:15:04.102Z",
+  "updatedAt": "2022-09-18T18:39:39.645Z",
+  "networkType": "ethereum",
   "devdoc": {
     "author": "Aimilios Vatikiotis",
     "details": "All custom types that we have used in E-Voting will be declared here",

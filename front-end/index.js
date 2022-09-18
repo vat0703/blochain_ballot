@@ -29,11 +29,11 @@ const candidatesEl = document.getElementById('candidates');
 
 const refreshCandidates = async () =>{
     candidatesEl.innerHTML = "";
-    var candidates;
-        await contract.methods.getCandidateList().call((err, res)=>{
-            candidates = res;
-        } );
-        candidatesEl.innerHTML = candidates;
+    debugger
+    const candidates = await contract.methods.getCandidateList().call({gas:6721975});
+    debugger
+    candidatesEl.innerText = candidates;
+    console.log(candidates) 
 
 }
 
@@ -46,9 +46,10 @@ const main = async () =>{
 
     accountEl.innerHTML = accountView;
 
+    await refreshCandidates();
+
 
 }
 
 main();
 
-refreshCandidates();
