@@ -1,34 +1,34 @@
 {
   "contractName": "Types",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"Aimilios Vatikiotis\",\"details\":\"All custom types that we have used in E-Voting will be declared here\",\"methods\":{},\"title\":\"Types\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Types.sol\":\"Types\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Types.sol\":{\"keccak256\":\"0xa5fde1cadd25dc247a18265c27c0ba6214c34a91e9d1b60a3fe53041948ad48f\",\"urls\":[\"bzz-raw://9166d1d268884e963d452d4cff5bec119c0962474595fffeb10d9609ad2a123b\",\"dweb:/ipfs/QmPBpeR4g9Qz2fwWx7CgMsUHmvBGk3oprayHLT5BH2SpxB\"]}},\"version\":1}",
-  "bytecode": "0x60636023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea365627a7a7231582033f94641483569667f784ae640c81c6a2797752560096732831fa3b1d7ec66366c6578706572696d656e74616cf564736f6c63430005100040",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea365627a7a7231582033f94641483569667f784ae640c81c6a2797752560096732831fa3b1d7ec66366c6578706572696d656e74616cf564736f6c63430005100040",
-  "sourceMap": "236:912:1:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
-  "deployedSourceMap": "236:912:1:-;;;;;;;;",
-  "source": "// SPDX-License-Identifier: GPL-3.0\npragma experimental ABIEncoderV2;\npragma solidity >=0.4.25 <0.9.0;\n\n/**\n * @title Types\n * @author Aimilios Vatikiotis\n * @dev All custom types that we have used in E-Voting will be declared here\n */\nlibrary Types {\n    struct Voter {\n        uint256 number; // voter unique ID\n        string name;\n        uint8 age;\n        uint8 stateCode;\n        uint8 constituencyCode;\n        bool isAlive;\n        uint256 votedTo; //  number of the candidate\n    }\n    struct Candidate {\n        // Note: If we can limit the length to a certain number of bytes,\n        // we can use one of bytes1 to bytes32 because they are much cheaper\n\n        string name;\n        string partyShortcut;\n        string partyFlag;\n        uint256 nominationNumber; // unique ID of candidate\n        uint8 stateCode;\n        uint8 constituencyCode;\n    }\n\n    struct Results {\n        string name;\n        string partyShortcut;\n        string partyFlag;\n        uint256 voteCount; // number of accumulated votes\n        uint256 nominationNumber; // unique ID of candidate\n        uint8 stateCode;\n        uint8 constituencyCode;\n    }\n}",
-  "sourcePath": "/home/aimilios/Desktop/blockchain/contracts/Types.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"author\":\"Aimilios Vatikiotis\",\"details\":\"All custom types that we have used in E-Voting will be declared here\",\"methods\":{},\"title\":\"Types\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Types.sol\":\"Types\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Types.sol\":{\"keccak256\":\"0x54e03d5c631c5bb2bcb2158182993953750e531bada0f9236bd0a0b75be1003a\",\"urls\":[\"bzz-raw://fad0445d10edc710254c9758d2d9ebbf10ed018196a5c6b4caf877be0f360d58\",\"dweb:/ipfs/Qmdbqbw8ABB8vqFnNHLhC7EBE92o8aqAZJWQ6Wf2S8fa8Z\"]}},\"version\":1}",
+  "bytecode": "0x60636023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea365627a7a72315820cc6576265da30d1b7bdcbd0b266c271530808f7c2ac5c1edcd56cb5a694dcc876c6578706572696d656e74616cf564736f6c63430005100040",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea365627a7a72315820cc6576265da30d1b7bdcbd0b266c271530808f7c2ac5c1edcd56cb5a694dcc876c6578706572696d656e74616cf564736f6c63430005100040",
+  "sourceMap": "236:593:4:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
+  "deployedSourceMap": "236:593:4:-;;;;;;;;",
+  "source": "// SPDX-License-Identifier: GPL-3.0\npragma experimental ABIEncoderV2;\npragma solidity >=0.4.25 <0.9.0;\n\n/**\n * @title Types\n * @author Aimilios Vatikiotis\n * @dev All custom types that we have used in E-Voting will be declared here\n */\nlibrary Types {\n    struct Voter {\n        bool hasVoted;\n        uint256 votingCenter;\n      }\n    struct Candidate {\n        // Note: If we can limit the length to a certain number of bytes,\n        // we can use one of bytes1 to bytes32 because they are much cheaper\n\n        string name;\n        string partyFlag;\n        uint256 nominationNumber; // unique ID of candidate\n    }\n\n    struct VotingCenter {\n        uint256 centerId;\n        string name;\n        uint256 count;\n    }\n\n    struct Vote {\n        uint256 candidate;\n        uint256 votingCenter;\n        uint256 count;\n    }\n}",
+  "sourcePath": "/home/aimilios/Desktop/blockchain-repo/blochain_ballot/contracts/Types.sol",
   "ast": {
     "absolutePath": "project:/contracts/Types.sol",
     "exportedSymbols": {
       "Types": [
-        1135
+        829
       ]
     },
-    "id": 1136,
+    "id": 830,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1090,
+        "id": 801,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "36:33:1"
+        "src": "36:33:4"
       },
       {
-        "id": 1091,
+        "id": 802,
         "literals": [
           "solidity",
           ">=",
@@ -39,7 +39,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "70:32:1"
+        "src": "70:32:4"
       },
       {
         "baseContracts": [],
@@ -47,154 +47,24 @@
         "contractKind": "library",
         "documentation": "@title Types\n@author Aimilios Vatikiotis\n@dev All custom types that we have used in E-Voting will be declared here",
         "fullyImplemented": true,
-        "id": 1135,
+        "id": 829,
         "linearizedBaseContracts": [
-          1135
+          829
         ],
         "name": "Types",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Types.Voter",
-            "id": 1106,
+            "id": 807,
             "members": [
               {
                 "constant": false,
-                "id": 1093,
-                "name": "number",
+                "id": 804,
+                "name": "hasVoted",
                 "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "279:14:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1092,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "279:7:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1095,
-                "name": "name",
-                "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "322:11:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                },
-                "typeName": {
-                  "id": 1094,
-                  "name": "string",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "322:6:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1097,
-                "name": "age",
-                "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "343:9:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1096,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "343:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1099,
-                "name": "stateCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "362:15:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1098,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "362:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1101,
-                "name": "constituencyCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "387:22:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1100,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "387:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1103,
-                "name": "isAlive",
-                "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "419:12:1",
+                "scope": 807,
+                "src": "279:13:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -202,10 +72,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 1102,
+                  "id": 803,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "419:4:1",
+                  "src": "279:4:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -216,11 +86,11 @@
               },
               {
                 "constant": false,
-                "id": 1105,
-                "name": "votedTo",
+                "id": 806,
+                "name": "votingCenter",
                 "nodeType": "VariableDeclaration",
-                "scope": 1106,
-                "src": "441:15:1",
+                "scope": 807,
+                "src": "302:20:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -228,10 +98,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1104,
+                  "id": 805,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "441:7:1",
+                  "src": "302:7:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -243,21 +113,21 @@
             ],
             "name": "Voter",
             "nodeType": "StructDefinition",
-            "scope": 1135,
-            "src": "256:235:1",
+            "scope": 829,
+            "src": "256:75:4",
             "visibility": "public"
           },
           {
             "canonicalName": "Types.Candidate",
-            "id": 1119,
+            "id": 814,
             "members": [
               {
                 "constant": false,
-                "id": 1108,
+                "id": 809,
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "675:11:1",
+                "scope": 814,
+                "src": "515:11:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -265,10 +135,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1107,
+                  "id": 808,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "675:6:1",
+                  "src": "515:6:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -279,37 +149,11 @@
               },
               {
                 "constant": false,
-                "id": 1110,
-                "name": "partyShortcut",
-                "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "696:20:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                },
-                "typeName": {
-                  "id": 1109,
-                  "name": "string",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "696:6:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1112,
+                "id": 811,
                 "name": "partyFlag",
                 "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "726:16:1",
+                "scope": 814,
+                "src": "536:16:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -317,10 +161,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1111,
+                  "id": 810,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "726:6:1",
+                  "src": "536:6:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -331,11 +175,11 @@
               },
               {
                 "constant": false,
-                "id": 1114,
+                "id": 813,
                 "name": "nominationNumber",
                 "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "752:24:1",
+                "scope": 814,
+                "src": "562:24:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -343,65 +187,13 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1113,
+                  "id": 812,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "752:7:1",
+                  "src": "562:7:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1116,
-                "name": "stateCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "812:15:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1115,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "812:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1118,
-                "name": "constituencyCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1119,
-                "src": "837:22:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1117,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "837:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
                   }
                 },
                 "value": null,
@@ -410,21 +202,47 @@
             ],
             "name": "Candidate",
             "nodeType": "StructDefinition",
-            "scope": 1135,
-            "src": "496:370:1",
+            "scope": 829,
+            "src": "336:283:4",
             "visibility": "public"
           },
           {
-            "canonicalName": "Types.Results",
-            "id": 1134,
+            "canonicalName": "Types.VotingCenter",
+            "id": 821,
             "members": [
               {
                 "constant": false,
-                "id": 1121,
+                "id": 816,
+                "name": "centerId",
+                "nodeType": "VariableDeclaration",
+                "scope": 821,
+                "src": "655:16:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 815,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "655:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 818,
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "897:11:1",
+                "scope": 821,
+                "src": "681:11:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -432,10 +250,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1120,
+                  "id": 817,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "897:6:1",
+                  "src": "681:6:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -446,63 +264,11 @@
               },
               {
                 "constant": false,
-                "id": 1123,
-                "name": "partyShortcut",
+                "id": 820,
+                "name": "count",
                 "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "918:20:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                },
-                "typeName": {
-                  "id": 1122,
-                  "name": "string",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "918:6:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1125,
-                "name": "partyFlag",
-                "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "948:16:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_string_storage_ptr",
-                  "typeString": "string"
-                },
-                "typeName": {
-                  "id": 1124,
-                  "name": "string",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "948:6:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_string_storage_ptr",
-                    "typeString": "string"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1127,
-                "name": "voteCount",
-                "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "974:17:1",
+                "scope": 821,
+                "src": "702:13:4",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -510,116 +276,127 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1126,
+                  "id": 819,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "974:7:1",
+                  "src": "702:7:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1129,
-                "name": "nominationNumber",
-                "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "1032:24:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1128,
-                  "name": "uint256",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "1032:7:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1131,
-                "name": "stateCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "1092:15:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1130,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "1092:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1133,
-                "name": "constituencyCode",
-                "nodeType": "VariableDeclaration",
-                "scope": 1134,
-                "src": "1117:22:1",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 1132,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "1117:5:1",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
                   }
                 },
                 "value": null,
                 "visibility": "internal"
               }
             ],
-            "name": "Results",
+            "name": "VotingCenter",
             "nodeType": "StructDefinition",
-            "scope": 1135,
-            "src": "872:274:1",
+            "scope": 829,
+            "src": "625:97:4",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Types.Vote",
+            "id": 828,
+            "members": [
+              {
+                "constant": false,
+                "id": 823,
+                "name": "candidate",
+                "nodeType": "VariableDeclaration",
+                "scope": 828,
+                "src": "750:17:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 822,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "750:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 825,
+                "name": "votingCenter",
+                "nodeType": "VariableDeclaration",
+                "scope": 828,
+                "src": "777:20:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 824,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "777:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 827,
+                "name": "count",
+                "nodeType": "VariableDeclaration",
+                "scope": 828,
+                "src": "807:13:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 826,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "807:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Vote",
+            "nodeType": "StructDefinition",
+            "scope": 829,
+            "src": "728:99:4",
             "visibility": "public"
           }
         ],
-        "scope": 1136,
-        "src": "236:912:1"
+        "scope": 830,
+        "src": "236:593:4"
       }
     ],
-    "src": "36:1112:1"
+    "src": "36:793:4"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/Types.sol",
       "exportedSymbols": {
         "Types": [
-          1135
+          829
         ]
       }
     },
@@ -631,9 +408,9 @@
             "ABIEncoderV2"
           ]
         },
-        "id": 1090,
+        "id": 801,
         "name": "PragmaDirective",
-        "src": "36:33:1"
+        "src": "36:33:4"
       },
       {
         "attributes": {
@@ -647,9 +424,9 @@
             ".0"
           ]
         },
-        "id": 1091,
+        "id": 802,
         "name": "PragmaDirective",
-        "src": "70:32:1"
+        "src": "70:32:4"
       },
       {
         "attributes": {
@@ -663,155 +440,25 @@
           "documentation": "@title Types\n@author Aimilios Vatikiotis\n@dev All custom types that we have used in E-Voting will be declared here",
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            1135
+            829
           ],
           "name": "Types",
-          "scope": 1136
+          "scope": 830
         },
         "children": [
           {
             "attributes": {
               "canonicalName": "Types.Voter",
               "name": "Voter",
-              "scope": 1135,
+              "scope": 829,
               "visibility": "public"
             },
             "children": [
               {
                 "attributes": {
                   "constant": false,
-                  "name": "number",
-                  "scope": 1106,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint256",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint256",
-                      "type": "uint256"
-                    },
-                    "id": 1092,
-                    "name": "ElementaryTypeName",
-                    "src": "279:7:1"
-                  }
-                ],
-                "id": 1093,
-                "name": "VariableDeclaration",
-                "src": "279:14:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "name",
-                  "scope": 1106,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "string",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "string",
-                      "type": "string"
-                    },
-                    "id": 1094,
-                    "name": "ElementaryTypeName",
-                    "src": "322:6:1"
-                  }
-                ],
-                "id": 1095,
-                "name": "VariableDeclaration",
-                "src": "322:11:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "age",
-                  "scope": 1106,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1096,
-                    "name": "ElementaryTypeName",
-                    "src": "343:5:1"
-                  }
-                ],
-                "id": 1097,
-                "name": "VariableDeclaration",
-                "src": "343:9:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "stateCode",
-                  "scope": 1106,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1098,
-                    "name": "ElementaryTypeName",
-                    "src": "362:5:1"
-                  }
-                ],
-                "id": 1099,
-                "name": "VariableDeclaration",
-                "src": "362:15:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "constituencyCode",
-                  "scope": 1106,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1100,
-                    "name": "ElementaryTypeName",
-                    "src": "387:5:1"
-                  }
-                ],
-                "id": 1101,
-                "name": "VariableDeclaration",
-                "src": "387:22:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "isAlive",
-                  "scope": 1106,
+                  "name": "hasVoted",
+                  "scope": 807,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "bool",
@@ -824,20 +471,20 @@
                       "name": "bool",
                       "type": "bool"
                     },
-                    "id": 1102,
+                    "id": 803,
                     "name": "ElementaryTypeName",
-                    "src": "419:4:1"
+                    "src": "279:4:4"
                   }
                 ],
-                "id": 1103,
+                "id": 804,
                 "name": "VariableDeclaration",
-                "src": "419:12:1"
+                "src": "279:13:4"
               },
               {
                 "attributes": {
                   "constant": false,
-                  "name": "votedTo",
-                  "scope": 1106,
+                  "name": "votingCenter",
+                  "scope": 807,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -850,25 +497,25 @@
                       "name": "uint256",
                       "type": "uint256"
                     },
-                    "id": 1104,
+                    "id": 805,
                     "name": "ElementaryTypeName",
-                    "src": "441:7:1"
+                    "src": "302:7:4"
                   }
                 ],
-                "id": 1105,
+                "id": 806,
                 "name": "VariableDeclaration",
-                "src": "441:15:1"
+                "src": "302:20:4"
               }
             ],
-            "id": 1106,
+            "id": 807,
             "name": "StructDefinition",
-            "src": "256:235:1"
+            "src": "256:75:4"
           },
           {
             "attributes": {
               "canonicalName": "Types.Candidate",
               "name": "Candidate",
-              "scope": 1135,
+              "scope": 829,
               "visibility": "public"
             },
             "children": [
@@ -876,7 +523,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "name",
-                  "scope": 1119,
+                  "scope": 814,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "string",
@@ -889,46 +536,20 @@
                       "name": "string",
                       "type": "string"
                     },
-                    "id": 1107,
+                    "id": 808,
                     "name": "ElementaryTypeName",
-                    "src": "675:6:1"
+                    "src": "515:6:4"
                   }
                 ],
-                "id": 1108,
+                "id": 809,
                 "name": "VariableDeclaration",
-                "src": "675:11:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "partyShortcut",
-                  "scope": 1119,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "string",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "string",
-                      "type": "string"
-                    },
-                    "id": 1109,
-                    "name": "ElementaryTypeName",
-                    "src": "696:6:1"
-                  }
-                ],
-                "id": 1110,
-                "name": "VariableDeclaration",
-                "src": "696:20:1"
+                "src": "515:11:4"
               },
               {
                 "attributes": {
                   "constant": false,
                   "name": "partyFlag",
-                  "scope": 1119,
+                  "scope": 814,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "string",
@@ -941,20 +562,20 @@
                       "name": "string",
                       "type": "string"
                     },
-                    "id": 1111,
+                    "id": 810,
                     "name": "ElementaryTypeName",
-                    "src": "726:6:1"
+                    "src": "536:6:4"
                   }
                 ],
-                "id": 1112,
+                "id": 811,
                 "name": "VariableDeclaration",
-                "src": "726:16:1"
+                "src": "536:16:4"
               },
               {
                 "attributes": {
                   "constant": false,
                   "name": "nominationNumber",
-                  "scope": 1119,
+                  "scope": 814,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -967,85 +588,59 @@
                       "name": "uint256",
                       "type": "uint256"
                     },
-                    "id": 1113,
+                    "id": 812,
                     "name": "ElementaryTypeName",
-                    "src": "752:7:1"
+                    "src": "562:7:4"
                   }
                 ],
-                "id": 1114,
+                "id": 813,
                 "name": "VariableDeclaration",
-                "src": "752:24:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "stateCode",
-                  "scope": 1119,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1115,
-                    "name": "ElementaryTypeName",
-                    "src": "812:5:1"
-                  }
-                ],
-                "id": 1116,
-                "name": "VariableDeclaration",
-                "src": "812:15:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "constituencyCode",
-                  "scope": 1119,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1117,
-                    "name": "ElementaryTypeName",
-                    "src": "837:5:1"
-                  }
-                ],
-                "id": 1118,
-                "name": "VariableDeclaration",
-                "src": "837:22:1"
+                "src": "562:24:4"
               }
             ],
-            "id": 1119,
+            "id": 814,
             "name": "StructDefinition",
-            "src": "496:370:1"
+            "src": "336:283:4"
           },
           {
             "attributes": {
-              "canonicalName": "Types.Results",
-              "name": "Results",
-              "scope": 1135,
+              "canonicalName": "Types.VotingCenter",
+              "name": "VotingCenter",
+              "scope": 829,
               "visibility": "public"
             },
             "children": [
               {
                 "attributes": {
                   "constant": false,
+                  "name": "centerId",
+                  "scope": 821,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 815,
+                    "name": "ElementaryTypeName",
+                    "src": "655:7:4"
+                  }
+                ],
+                "id": 816,
+                "name": "VariableDeclaration",
+                "src": "655:16:4"
+              },
+              {
+                "attributes": {
+                  "constant": false,
                   "name": "name",
-                  "scope": 1134,
+                  "scope": 821,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "string",
@@ -1058,72 +653,20 @@
                       "name": "string",
                       "type": "string"
                     },
-                    "id": 1120,
+                    "id": 817,
                     "name": "ElementaryTypeName",
-                    "src": "897:6:1"
+                    "src": "681:6:4"
                   }
                 ],
-                "id": 1121,
+                "id": 818,
                 "name": "VariableDeclaration",
-                "src": "897:11:1"
+                "src": "681:11:4"
               },
               {
                 "attributes": {
                   "constant": false,
-                  "name": "partyShortcut",
-                  "scope": 1134,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "string",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "string",
-                      "type": "string"
-                    },
-                    "id": 1122,
-                    "name": "ElementaryTypeName",
-                    "src": "918:6:1"
-                  }
-                ],
-                "id": 1123,
-                "name": "VariableDeclaration",
-                "src": "918:20:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "partyFlag",
-                  "scope": 1134,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "string",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "string",
-                      "type": "string"
-                    },
-                    "id": 1124,
-                    "name": "ElementaryTypeName",
-                    "src": "948:6:1"
-                  }
-                ],
-                "id": 1125,
-                "name": "VariableDeclaration",
-                "src": "948:16:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "voteCount",
-                  "scope": 1134,
+                  "name": "count",
+                  "scope": 821,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -1136,107 +679,120 @@
                       "name": "uint256",
                       "type": "uint256"
                     },
-                    "id": 1126,
+                    "id": 819,
                     "name": "ElementaryTypeName",
-                    "src": "974:7:1"
+                    "src": "702:7:4"
                   }
                 ],
-                "id": 1127,
+                "id": 820,
                 "name": "VariableDeclaration",
-                "src": "974:17:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "nominationNumber",
-                  "scope": 1134,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint256",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint256",
-                      "type": "uint256"
-                    },
-                    "id": 1128,
-                    "name": "ElementaryTypeName",
-                    "src": "1032:7:1"
-                  }
-                ],
-                "id": 1129,
-                "name": "VariableDeclaration",
-                "src": "1032:24:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "stateCode",
-                  "scope": 1134,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1130,
-                    "name": "ElementaryTypeName",
-                    "src": "1092:5:1"
-                  }
-                ],
-                "id": 1131,
-                "name": "VariableDeclaration",
-                "src": "1092:15:1"
-              },
-              {
-                "attributes": {
-                  "constant": false,
-                  "name": "constituencyCode",
-                  "scope": 1134,
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "type": "uint8",
-                  "value": null,
-                  "visibility": "internal"
-                },
-                "children": [
-                  {
-                    "attributes": {
-                      "name": "uint8",
-                      "type": "uint8"
-                    },
-                    "id": 1132,
-                    "name": "ElementaryTypeName",
-                    "src": "1117:5:1"
-                  }
-                ],
-                "id": 1133,
-                "name": "VariableDeclaration",
-                "src": "1117:22:1"
+                "src": "702:13:4"
               }
             ],
-            "id": 1134,
+            "id": 821,
             "name": "StructDefinition",
-            "src": "872:274:1"
+            "src": "625:97:4"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Types.Vote",
+              "name": "Vote",
+              "scope": 829,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "candidate",
+                  "scope": 828,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 822,
+                    "name": "ElementaryTypeName",
+                    "src": "750:7:4"
+                  }
+                ],
+                "id": 823,
+                "name": "VariableDeclaration",
+                "src": "750:17:4"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "votingCenter",
+                  "scope": 828,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 824,
+                    "name": "ElementaryTypeName",
+                    "src": "777:7:4"
+                  }
+                ],
+                "id": 825,
+                "name": "VariableDeclaration",
+                "src": "777:20:4"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "count",
+                  "scope": 828,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 826,
+                    "name": "ElementaryTypeName",
+                    "src": "807:7:4"
+                  }
+                ],
+                "id": 827,
+                "name": "VariableDeclaration",
+                "src": "807:13:4"
+              }
+            ],
+            "id": 828,
+            "name": "StructDefinition",
+            "src": "728:99:4"
           }
         ],
-        "id": 1135,
+        "id": 829,
         "name": "ContractDefinition",
-        "src": "236:912:1"
+        "src": "236:593:4"
       }
     ],
-    "id": 1136,
+    "id": 830,
     "name": "SourceUnit",
-    "src": "36:1112:1"
+    "src": "36:793:4"
   },
   "compiler": {
     "name": "solc",
@@ -1251,8 +807,7 @@
     }
   },
   "schemaVersion": "3.4.9",
-  "updatedAt": "2022-09-12T18:22:06.386Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-09-18T18:15:04.102Z",
   "devdoc": {
     "author": "Aimilios Vatikiotis",
     "details": "All custom types that we have used in E-Voting will be declared here",

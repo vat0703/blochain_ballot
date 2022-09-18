@@ -23,16 +23,17 @@ contract Ballot {
 
     /**
      * @dev Create a new ballot to choose one of 'candidateNames'
-     * @param startTime_ When the voting process will start
-     * @param endTime_ When the voting process will end
      */
-     constructor(uint256 startTime_, uint256 endTime_) {
+      constructor() public{
         initializeCandidateDatabase_();
         initializeVotingCenterDatabase_();
         initializeVoterDatabase_();
         
         initializeResultsDatabase_();
         electionChief = msg.sender;
+
+
+        
     }
 
     /**
