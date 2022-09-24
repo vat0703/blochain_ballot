@@ -19,6 +19,7 @@ contract Ballot {
     address electionChief;
     //2-dim results array. 1st dim: voting centers, 2nd dim candidates
     uint256[][] Results;
+    uint256 votersCount = 0;
 
 
     /**
@@ -210,7 +211,7 @@ contract Ballot {
         }
     }
 
-    function registerVoter(address voter_) isElectionChief public {
+    function registerVoter(address voter_) private {
         uint256 votingCenterIndex = 0;
         for(uint i = 0; i < votingCenters.length; i++) {
             if(votingCenters[i].count < 10) {
@@ -220,5 +221,20 @@ contract Ballot {
             }
         }
         voters[voter_] = Types.Voter(false, votingCenterIndex);
+        votersCount += 1;
+        emit voterRegistered(voter_);
     }
+    function registerVoters(address[] memory voters_) public {
+        for(uint256 i = 0; i < voters_.length; i++) {
+            registerVoter(voters_[i]);
+        }
+    }
+    function getVotersCount() public view returns (uint256) {
+        return votersCount;
+    }
+    function getVotingCenter(address voter_) public view returns (uint256) {
+        Types.Voter memory voter = voters[voter_];
+        return voter.votingCenter;
+    }
+    event voterRegistered(address voter_);
 }
