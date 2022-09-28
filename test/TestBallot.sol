@@ -22,15 +22,15 @@ contract TestBallot {
     //     Assert.equal(c, 10, "Voting Centers should be 10");
     // }
     function testCanVote() public {
-        uint votingCenter_ = 9;
+        uint votingCenter_ = 0;
         uint candidate_ = 0;
         ballot.vote(votingCenter_, candidate_);
         uint votesCount = ballot.getVotesCount();
         Assert.equal(votesCount, 1, "Only one person has voted");
 
-        // uint256[] memory results = ballot.getResults();
-        // uint256[] memory expected = [1,0,0,0,0];
-        // Assert.equal(results, expected, "First candidate of first voting center should have one vote");
+        uint256 results = ballot.getResults()[candidate_];
+        uint256 expected = 1;
+        Assert.equal(results, expected, "First candidate of first voting center should have one vote");
     }
     // function testCanGetResultsBeforeVoting() public {
     //     uint256[] memory results = ballot.getResults();

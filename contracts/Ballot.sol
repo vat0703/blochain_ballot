@@ -90,7 +90,7 @@ contract Ballot {
         view
         returns (uint256[] memory)
     {
-        uint256[] memory results;
+        uint256[] memory results = new uint256[](candidates.length);
         for(uint i = 0; i < candidates.length; i++) {
             results[i] = 0;
             for(uint j = 0; j < votingCenters.length; j++) {
