@@ -52,6 +52,7 @@ contract Ballot {
      */
     function vote(uint256 votingCenter_, uint256 candidate_) isEligibleVote belongsInVotingCenter(votingCenter_) public
     {
+        emit startVoting(msg.sender);
         // updating the current voter values
         voters[msg.sender].hasVoted = true;
 
@@ -211,18 +212,15 @@ contract Ballot {
         }));
     }
     function initializeResultsDatabase_() internal {
-        Results = new uint256[][](votingCenters.length * candidates.length);
 
-        // note: if voting is wrong change this
-        // to embedded for loops
-        uint256[] memory candidates_array;
-        for (uint j=0;j<candidates.length;j++) {
-            candidates_array[j] = 0;
-        }
         for (uint i=0;i<votingCenters.length;i++){
-            Results[i] = candidates_array;
+            uint256[] memory arr = new uint256[](votingCenters.length);
+            for (uint j=0;j<candidates.length;j++) {
+                arr[i] = 0;
+            }
+            Results.push(arr);
         }
-        votesCount = 0;
+        votesCount = uint256(0);
     }
 
     function registerVoter(address voter_) public {
@@ -252,10 +250,15 @@ contract Ballot {
     }
     event voterRegistered(address voter_);
     event voted(address voter_);
+    event startVoting(address voter_);
+
     function getVotesCount() public view returns (uint256) {
         return votesCount;
     }
-    function getVtingCenters() public view returns (Types.VotingCenter[] memory) {
+    function getVotingCenters() public view returns (Types.VotingCenter[] memory) {
         return votingCenters;
+    }
+    function getVotingCentersCount() public view returns (uint256) {
+        return votingCenters.length;
     }
 }
