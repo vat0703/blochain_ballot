@@ -1,0 +1,9 @@
+.results{
+    display: flex!important;
+    flex-direction: row!important;
+    flex-wrap: nowrap!important;
+    justify-content: space-around;
+    width: 200px!important;
+
+    margin-top: 200px!important;
+}
