@@ -67,18 +67,18 @@ const vote = async(id) => {
     accountView = accountToShow.toString();
 
    
-        const centers = await contract.methods.getVotingCenter(accountToShow).call({gas:343434});
+        const centers = await contract.methods.getVotingCenter(accountView).call({gas:343434});
     console.log(centers);
     
-    // await contract.methods.vote(id, centers[2].centerId).send({
-    //     from: accountsInit[0],gas: 6721975   });
+     await contract.methods.vote(centers, id).send({from: accountView,gas: 6721975});
+          
 }
 
 
 
 const  getResults = async() => {
-    const test = await contract.methods.getResults().call({gas:343434});
-    console.log(test)
+    const test = await contract.methods.getResults().call({gas:6721975});
+    console.log("here",test)
 }
 
 
@@ -107,8 +107,8 @@ const main = async () =>{
     await refreshCandidates();
     await registerUser();
     await getCenters();
-    
-
+    await vote(0);
+    await getResults();
 
     }
 
@@ -118,11 +118,3 @@ const main = async () =>{
 main();
 
 
-var test = document.getElementsByClassName('.vote');
-
-$('button').each(function(index){
-  
-    $(this).trigger("click",vote(index+1));
-    /* Do your stuffs here */
- 
-});
