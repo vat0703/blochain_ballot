@@ -244,8 +244,8 @@ contract Ballot {
     function getVotersCount() public view returns (uint256) {
         return votersCount;
     }
-    function getVotingCenter() public view returns (uint256) {
-        Types.Voter memory voter = voters[msg.sender];
+    function getVotingCenter(address voter_) public view returns (uint256) {
+        Types.Voter memory voter = voters[voter_];
         return voter.votingCenter;
     }
     event voterRegistered(address voter_);
