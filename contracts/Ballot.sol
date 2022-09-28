@@ -14,7 +14,7 @@ contract Ballot {
     mapping(address => Types.Voter) voters;
     // mapping(uint256 => Types.Candidate) candidate;
     Types.VotingCenter[] public votingCenters;
-    mapping(uint256 => uint256) internal votesCount;
+    uint256 votesCount;
     Types.Vote[] public votes;
     address electionChief;
     //2-dim results array. 1st dim: voting centers, 2nd dim candidates
@@ -56,20 +56,27 @@ contract Ballot {
         voters[msg.sender].hasVoted = true;
 
        Results[votingCenter_][candidate_] += 1;
+       votesCount +=1;
+       emit voted(msg.sender);
     }
 
     /**
-     * @dev sends all candidate list with their votes count
+     * @dev sends all candidate list with their votes count per voting center
      * @param votingCenter_ voting center
      * @return uint256[] array of total counts per candidate of voting center
      */
-    function getResults(uint256 votingCenter_)
+    function getResultsPerVotingCenter(uint256 votingCenter_)
         public
         view
         returns (uint256[] memory)
     {
+        uint256[] memory results;
+
+        for(uint i = 0; i < candidates.length; i++) {
+            results[i] = Results[votingCenter_][i];
+        }
     
-        return Results[votingCenter_];
+        return results;
     }
 
 
@@ -204,14 +211,21 @@ contract Ballot {
         }));
     }
     function initializeResultsDatabase_() internal {
-        for (uint i=0;i<votingCenters.length;i++){
-            for (uint j=0;j<candidates.length;j++) {
-                Results.push ([0,0]);
-            }
+        Results = new uint256[][](votingCenters.length * candidates.length);
+
+        // note: if voting is wrong change this
+        // to embedded for loops
+        uint256[] memory candidates_array;
+        for (uint j=0;j<candidates.length;j++) {
+            candidates_array[j] = 0;
         }
+        for (uint i=0;i<votingCenters.length;i++){
+            Results[i] = candidates_array;
+        }
+        votesCount = 0;
     }
 
-    function registerVoter(address voter_) private {
+    function registerVoter(address voter_) public {
         uint256 votingCenterIndex = 0;
         for(uint i = 0; i < votingCenters.length; i++) {
             if(votingCenters[i].count < 10) {
@@ -232,9 +246,13 @@ contract Ballot {
     function getVotersCount() public view returns (uint256) {
         return votersCount;
     }
-    function getVotingCenter(address voter_) public view returns (uint256) {
-        Types.Voter memory voter = voters[voter_];
+    function getVotingCenter() public view returns (uint256) {
+        Types.Voter memory voter = voters[msg.sender];
         return voter.votingCenter;
     }
     event voterRegistered(address voter_);
+    event voted(address voter_);
+    function getVotesCount() public view returns (uint256) {
+        return votesCount;
+    }
 }
