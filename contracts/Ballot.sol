@@ -160,52 +160,52 @@ contract Ballot {
 
     function initializeVotingCenterDatabase_() internal {
         votingCenters.push(Types.VotingCenter({
-            centerId: 1,
+            centerId: uint256(1),
             name: "athens",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 2,
+            centerId: uint256(2),
             name: "thessaloniki",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 3,
+            centerId: uint256(3),
             name: "patra",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 4,
+            centerId: uint256(4),
             name: "irakleio",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 5,
+            centerId: uint256(5),
             name: "larissa",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 6,
+            centerId: uint256(6),
             name: "volos",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 7,
+            centerId: uint256(7),
             name: "ioannina",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 8,
+            centerId: uint256(8),
             name: "trikala",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 9,
+            centerId: uint256(9),
             name: "xalkida",
             count: 0
         }));
         votingCenters.push(Types.VotingCenter({
-            centerId: 10,
+            centerId: uint256(10),
             name: "serres",
             count: 0
         }));
@@ -254,5 +254,8 @@ contract Ballot {
     event voted(address voter_);
     function getVotesCount() public view returns (uint256) {
         return votesCount;
+    }
+    function getVtingCenters() public view returns (Types.VotingCenter[] memory) {
+        return votingCenters;
     }
 }
