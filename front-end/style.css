@@ -13,3 +13,18 @@
     float: right!important;
     margin: 10px;
 }
+
+
+.second{
+    margin-top: 10px;
+    
+}
+
+#resultsPerCenter{
+    width: 300px!important;
+}
+
+.name{
+    background-color: lightgray;
+    margin-bottom: 5px;
+}

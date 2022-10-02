@@ -26,6 +26,7 @@ let accountView;
 
 const accountEl = document.getElementById('account');
 const candidatesEl = document.getElementById('candidates');
+const resultsPerVotingCenter = document.getElementById('resultsView');
 
 
 const getCenters = async() =>{
@@ -44,6 +45,7 @@ const refreshCandidates = async () =>{
         container.className = 'col';
         var name = document.createElement('div');
         name.className = 'name';
+        name.style ='width: 200px; text-align: center;'
         name.innerText = element.name;
     
         var image = document.createElement('img');
@@ -167,6 +169,45 @@ const  getResults = async() => {
         }
     });    }
 
+    const  getResultsPerCenter = async(id) => {
+        
+        console.log(id)
+    
+        const results = await contract.methods.getResultsPerVotingCenter(id).call({gas:6721975});
+        console.log(results);
+        
+        const candidates = await contract.methods.getCandidateList().call({gas:6721975});
+        resultsPerVotingCenter.innerHTML = "";
+        
+        console.log(candidates) 
+        candidates.forEach((element,index) => {
+            var container = document.createElement('div');
+            container.className = 'col';
+            container.style ="margin-top:10px;"
+            var name = document.createElement('div');
+            name.className = 'name';
+            name.style ='width: 200px; text-align: center;'
+            name.innerText = element.name;
+        
+            var image = document.createElement('img');
+            image.src = element.partyFlag;
+            image.style = "width:200px; height:200px";
+            var votesPerCenter = document.createElement('span');
+            votesPerCenter.style ='width: 200px; text-align: center;'
+          
+            votesPerCenter.innerHTML = "Total Votes: " + results[index];
+                       
+            container.prepend(votesPerCenter);
+            container.prepend(image);
+            container.prepend(name);
+           
+            resultsPerVotingCenter.append(container);
+
+        });
+    
+  
+        }
+
 
 const registerUser = async() =>{
     const accountToShow = await (await web3.eth.requestAccounts()).toString();
@@ -203,6 +244,9 @@ const main = async () =>{
 
 
 document.getElementById("results").onclick = getResults;
+$('#resultsPerCenter').change(function(){
+    getResultsPerCenter($(this).val());
+})
 document.getElementById("register").onclick = registerUser;
 voteReady();
 
