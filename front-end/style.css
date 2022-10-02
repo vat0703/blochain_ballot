@@ -1,3 +1,10 @@
+#results{
+    max-height: 50px!important;
+}
+body{
+    background-color:gainsboro!important;
+}
+
 .results{
     display: flex!important;
     flex-direction: row!important;
@@ -5,10 +12,12 @@
     justify-content: space-around;
     width: 200px!important;
 
-    margin-top: 200px!important;
+    margin-top: 40px!important;
 }
 
-
+.customheigth{
+    height: 40px!important;
+}
 .register{
     float: right!important;
     margin: 10px;
@@ -27,4 +36,11 @@
 .name{
     background-color: lightgray;
     margin-bottom: 5px;
+}
+
+.votesSpan{
+display: block;
+text-align: center;
+width: 200px;
+background-color: lightgray;
 }

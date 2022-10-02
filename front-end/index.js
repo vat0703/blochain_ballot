@@ -193,7 +193,8 @@ const  getResults = async() => {
             image.src = element.partyFlag;
             image.style = "width:200px; height:200px";
             var votesPerCenter = document.createElement('span');
-            votesPerCenter.style ='width: 200px; text-align: center;'
+            votesPerCenter.className= 'votesSpan';
+            votesPerCenter.style ='text-align: center; margin-top:10px;' 
           
             votesPerCenter.innerHTML = "Total Votes: " + results[index];
                        
